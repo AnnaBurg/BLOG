@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Registration</title>
+    <title>Login</title>
     <style>
         * {
             box-sizing: border-box;
@@ -25,7 +25,14 @@
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 500px;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
         }
 
         label {
@@ -36,51 +43,21 @@
         }
 
         input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        textarea {
+        input[type="password"] {
             width: 100%;
             padding: 12px;
             margin-bottom: 20px;
             border: 1px solid #ddd;
             border-radius: 6px;
             font-size: 16px;
-            transition: border 0.3s;
+            transition: all 0.3s ease;
         }
 
         input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="password"]:focus,
-        textarea:focus {
+        input[type="password"]:focus {
             border-color: #4a90e2;
             outline: none;
             box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
-        }
-
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .radio-group {
-            margin-bottom: 20px;
-        }
-
-        .radio-option {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        input[type="radio"] {
-            margin-right: 10px;
-            width: 16px;
-            height: 16px;
-        }
-
-        .light {
-            font-weight: normal;
-            color: #555;
         }
 
         button {
@@ -94,11 +71,31 @@
             width: 100%;
             font-weight: 600;
             transition: background-color 0.3s;
+            margin-top: 10px;
         }
 
         button:hover {
             background-color: #357ab8;
         }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: -15px;
+            margin-bottom: 20px;
+        }
+
+        .forgot-password a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .forgot-password a:hover {
+            color: #4a90e2;
+            text-decoration: underline;
+        }
+
         .register-link {
             text-align: center;
             margin-top: 20px;
@@ -115,7 +112,7 @@
             text-decoration: underline;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 480px) {
             form {
                 padding: 20px;
             }
@@ -124,33 +121,22 @@
 </head>
 <body>
     <form>
+        <h1>Вход в аккаунт</h1>
+
         <label for="name">Никнейм</label>
         <input type="text" id="name" name="user_name" placeholder="Введите ваш никнейм">
 
-        <div class="radio-group">
-            <label>Пол:</label>
-            <div class="radio-option">
-                <input type="radio" id="man" value="man" name="user_gender">
-                <label for="man" class="light">Мужчина</label>
-            </div>
-            <div class="radio-option">
-                <input type="radio" id="woman" value="woman" name="user_gender">
-                <label for="woman" class="light">Женщина</label>
-            </div>
+        <label for="password">Пароль</label>
+        <input type="password" id="password" name="user_password" placeholder="Введите ваш пароль">
+
+        <div class="forgot-password">
+            <a href="#">Забыли пароль?</a>
         </div>
 
-        <label for="mail">Почта</label>
-        <input type="email" id="mail" name="user_mail" placeholder="example@mail.com">
+        <button type="submit">Войти</button>
 
-        <label for="bio">Описание профиля</label>
-        <textarea id="bio" name="user_bio" placeholder="Расскажите немного о себе"></textarea>
-
-        <label for="password">Пароль</label>
-        <input type="password" id="password" name="user_password" placeholder="Не менее 8 символов">
-
-        <button type="submit">Зарегистрироваться</button>
         <div class="register-link">
-            Уже есть аккаунт? <a href="#">Войти</a>
+            Нет аккаунта? <a href="#">Зарегистрироваться</a>
         </div>
     </form>
 </body>
