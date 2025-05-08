@@ -4,8 +4,13 @@ app = Flask(__name__)
 
 
 @app.route('/')
+def main():
+    return render_template('main.html')
+
+@app.route('/registration')
 def register():
     return render_template('registration.html')
+
 
 @app.route('/login')
 def login():
