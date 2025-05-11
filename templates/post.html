@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создать новый пост</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        .create-post-container {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .page-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #4a90e2;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        }
+
+        textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+
+        .btn {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #357ab8;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            margin-right: 15px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .image-preview {
+            width: 100%;
+            height: 200px;
+            background-color: #eee;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            background-size: cover;
+            background-position: center;
+            display: none;
+        }
+
+        .image-upload {
+            margin-bottom: 25px;
+        }
+
+        .image-upload label {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #e9ecef;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .image-upload label:hover {
+            background-color: #dee2e6;
+        }
+
+        .image-upload input[type="file"] {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .create-post-container {
+                padding: 20px;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+                gap: 15px;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">Мой Блог</a>
+                <div class="nav-links">
+                    <a href="/">Главная</a>
+                    <a href="/profile">Мой профиль</a>
+                    <a href="/logout">Выйти</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="create-post-container">
+                <h1 class="page-title">Создать новый пост</h1>
+
+                <form action="/create_post" method="POST" enctype="multipart/form-data">
+                    <div class="image-preview" id="imagePreview"></div>
+
+                    <div class="image-upload">
+                        <label for="postImage">Выберите изображение</label>
+                        <input type="file" id="postImage" name="image" accept="image/*">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Заголовок</label>
+                        <input type="text" id="title" name="title" placeholder="Введите заголовок поста" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="content">Содержание</label>
+                        <textarea id="content" name="content" placeholder="Напишите ваш пост здесь..." required></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn">Опубликовать</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Превью изображения перед загрузкой
+        const imageUpload = document.getElementById('postImage');
+        const imagePreview = document.getElementById('imagePreview');
+
+        imageUpload.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+
+                reader.addEventListener('load', function() {
+                    imagePreview.style.display = 'block';
+                    imagePreview.style.backgroundImage = `url(${this.result})`;
+                });
+
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
